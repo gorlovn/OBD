@@ -1,14 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import requests
-from requests.auth import HTTPBasicAuth
 from obd_conf import auth, obdsim_url
-from obd_conf import GREEN, BLUE, PINK, YELLOW, RED, ENDC
-
 import logging
 
 log = logging.getLogger(__name__)
 r_string = obdsim_url + "obdstate.json"
+
 
 class OBDConnection:
 
@@ -44,7 +42,7 @@ class OBDConnection:
                 result = {}
                 for item in content:
                     name = item["name"]
-                    val  = item["val"]
+                    val = item["val"]
                     result[name] = val
                 return result
             else:

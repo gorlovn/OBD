@@ -11,7 +11,7 @@ from obd2 import OBDConnection
 sys.stdout = codecs.getwriter('utf-8')(sys.stdout)
 
 LOG_FILENAME = '_obd2.out'
-logging.basicConfig(filename = LOG_FILENAME, level = logging.INFO,)
+logging.basicConfig(filename=LOG_FILENAME, level=logging.INFO,)
 
 console = logging.StreamHandler()
 console.setLevel(logging.INFO)
