@@ -2,6 +2,11 @@ OBDDetailsForm:
 
 <OBDDetailsForm>:
     anchor_y: "top"
+    speed_box: speed_input
+    rpm_box: rpm_input
+    throttle_box: throttle_input
+    temp_box: temp_input
+    time_box: time_input
     BoxLayout:
         orientation: "vertical"
         height: "300dp"
@@ -15,21 +20,27 @@ OBDDetailsForm:
             Label:
                 text: "Speed (km/hr): "
             TextInput:
+                id: speed_input
             Label:
                 text: "RPM: "
             TextInput:
+                id: rpm_input
             Label:
                 text: "Throttle Position %: "
             TextInput:
+                id: throttle_input
             Label:
                 text: "Engine Coolant Temp: "
             TextInput:
+                id: temp_input
             Label:
                 text: "Run Time Since Engine Start: "
             TextInput:
+                id: time_input
         
         Button:
             size_hint_y: None
             height: "40dp"
             text: "Connect"
+            on_press: root.connect()
     
