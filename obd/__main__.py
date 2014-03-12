@@ -7,8 +7,25 @@ from kivy.properties import ObjectProperty
 from kivy.uix.modalview import ModalView
 from kivy.uix.label import Label
 from kivy.uix.button import Button
+from kivy.uix.boxlayout import BoxLayout
 from obdII import OBDConnection
 from obdII import OBDException
+
+
+class ItemList(BoxLayout):
+    list_view = ObjectProperty()
+
+    def __init__(self):
+        super(ItemList, self).__init__()
+        self.app = OBD.get_running_app()
+        self.list_view.adapter.data = sorted(self.app.obdLink.getState())
+
+
+class OBDRoot(BoxLayout):
+    def show_item_list(self):
+        self.clear_widgets()
+        self.item_list = ItemList()
+        self.add_widget(self.item_list)
 
 
 class ConnectionModal(ModalView):
@@ -23,7 +40,8 @@ class ConnectionModal(ModalView):
         app = OBD.get_running_app()
         try:
             app.connect_to_obd()
-            self.label.text = "Connected!"
+            app.root.show_item_list()
+            self.dismiss()
         except OBDException:
             self.label.text = "Sorry, couldn't connect"
             button = Button(text="Try Again")
