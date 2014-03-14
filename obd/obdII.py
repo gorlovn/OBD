@@ -16,13 +16,34 @@ class OBDConnection:
         self.content = None
         self.status_code = None
         try:
-            r = requests.get(r_string, auth=auth, timeout=0.5)
+            r = requests.get(r_string, auth=auth)
             self.status_code = r.status_code
             if r.status_code == 200:
                 rj = r.json()
                 self.content = rj["content"]
         except:
             pass
+
+    def getStateS(self):
+        self.status_code = None
+        try:
+            r = requests.get(r_string, auth=auth)
+            self.status_code = r.status_code
+            if r.status_code == 200:
+                rj = r.json()
+                content = rj["content"]
+                self.content = content
+                result = []
+                for item in content:
+                    name = item["name"]
+                    val = item["val"]
+                    sr = "{0}: {1}".format(name, val)
+                    result.append(sr)
+                return result
+            else:
+                return None
+        except:
+            return None
 
     def getState(self):
         self.status_code = None

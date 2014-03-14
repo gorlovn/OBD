@@ -8,8 +8,14 @@ from kivy.uix.modalview import ModalView
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
+from kivy.properties import StringProperty
 from obdII import OBDConnection
 from obdII import OBDException
+
+
+class ItemListItem(BoxLayout):
+    item_name = StringProperty()
+    item_value = StringProperty()
 
 
 class ItemList(BoxLayout):
@@ -18,7 +24,15 @@ class ItemList(BoxLayout):
     def __init__(self):
         super(ItemList, self).__init__()
         self.app = OBD.get_running_app()
-        self.list_view.adapter.data = sorted(self.app.obdLink.getState())
+        self.list_view.adapter.data = self.app.obdLink.getState()
+
+    def obd_converter(self, index, item_name):
+        result = {
+            "item_name": item_name,
+            "item_value": str(self.app.obdLink.getState()[item_name])
+        }
+
+        return result
 
 
 class OBDRoot(BoxLayout):

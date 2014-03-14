@@ -1,3 +1,6 @@
+#:import la kivy.adapters.listadapter
+#:import ok __main__
+
 OBDRoot:
 
 <OBDRoot>:
@@ -46,8 +49,17 @@ OBDRoot:
             height: "40dp"
             text: "Connect"
             on_press: root.connect()
+
+<ItemListItem>:
+    size_hint_y: None
+    height: "40dp"
+    Label:
+        text: root.item_name
+    Label:
+        text: root.item_value
             
 <ItemList>:
     list_view: list_view
     ListView:
-        id: list_view    
+        id: list_view
+        adapter: la.ListAdapter(data=[], cls=ok.ItemListItem, args_converter=root.obd_converter)    
