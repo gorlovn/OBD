@@ -16,6 +16,7 @@ from obdII import OBDException
 class ItemListItem(BoxLayout):
     item_name = StringProperty()
     item_value = StringProperty()
+    background = ObjectProperty()
 
 
 class ItemList(BoxLayout):
@@ -29,13 +30,12 @@ class ItemList(BoxLayout):
     def obd_converter(self, index, item_name):
         result = {
             "item_name": item_name,
-            "item_value": str(self.app.obdLink.getState()[item_name]),
-            "background": (0.05, 0.05, 0.07, 1)
+            "item_value": str(self.app.obdLink.getState()[item_name])
         }
         if index % 2:
             result["background"] = (0, 0, 0, 1)
         else:
-            result["background"] = (0.05, 0.05, 0.07, 1)
+            result["background"] = (0.5, 0.5, 0.7, 1)
 
         return result
 
