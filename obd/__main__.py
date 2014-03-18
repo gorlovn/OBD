@@ -29,8 +29,13 @@ class ItemList(BoxLayout):
     def obd_converter(self, index, item_name):
         result = {
             "item_name": item_name,
-            "item_value": str(self.app.obdLink.getState()[item_name])
+            "item_value": str(self.app.obdLink.getState()[item_name]),
+            "background": (0.05, 0.05, 0.07, 1)
         }
+        if index % 2:
+            result["background"] = (0, 0, 0, 1)
+        else:
+            result["background"] = (0.05, 0.05, 0.07, 1)
 
         return result
 
