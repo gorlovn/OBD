@@ -1,11 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import requests
 from requests.auth import HTTPBasicAuth
-auth=HTTPBasicAuth('gnv@ctmed.ru', '10203040')
+auth = HTTPBasicAuth('gnv@ctmed.ru', '10203040')
 
-obdsim_url = "http://127.0.0.1:8000/obdsim/default/api/"
+obdsim_url = "http://bs.ctmed.ru:50350/obdsim/default/api/"
 
 GREEN = '\033[92m'
 BLUE = '\033[94m'
