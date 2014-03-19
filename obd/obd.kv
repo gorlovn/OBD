@@ -7,48 +7,15 @@ OBDRoot:
     OBDDetailsForm:
 
 <OBDDetailsForm>:
-    anchor_y: "top"
-    speed_box: speed_input
-    rpm_box: rpm_input
-    throttle_box: throttle_input
-    temp_box: temp_input
-    time_box: time_input
-    BoxLayout:
-        orientation: "vertical"
-        height: "300dp"
+    anchor_x: "center"
+    anchor_y: "center"
+    Button:
         size_hint_y: None
-        GridLayout:
-            cols: 2
-            row_default_height: "40dp"
-            row_force_default: True
-            spacing: "10dp"
-            padding: "10dp"
-            Label:
-                text: "Speed (km/hr): "
-            TextInput:
-                id: speed_input
-            Label:
-                text: "RPM: "
-            TextInput:
-                id: rpm_input
-            Label:
-                text: "Throttle Position %: "
-            TextInput:
-                id: throttle_input
-            Label:
-                text: "Engine Coolant Temp: "
-            TextInput:
-                id: temp_input
-            Label:
-                text: "Run Time Since Engine Start: "
-            TextInput:
-                id: time_input
-        
-        Button:
-            size_hint_y: None
-            height: "40dp"
-            text: "Connect"
-            on_press: root.connect()
+        height: "40dp"
+        size_hint_x: None
+        width: "100dp"
+        text: "Connect"
+        on_press: root.connect()
 
 <ItemListItem>:
     size_hint_y: None
@@ -67,6 +34,14 @@ OBDRoot:
             
 <ItemList>:
     list_view: list_view
+    button: button
+    orientation: "vertical"
     ListView:
         id: list_view
-        adapter: la.ListAdapter(data=[], cls=ok.ItemListItem, args_converter=root.obd_converter)    
+        adapter: la.ListAdapter(data=[], cls=ok.ItemListItem, args_converter=root.obd_converter)
+    Button:
+        id: button
+        size_hint_y: None
+        height: "40dp"
+        text: "Refresh"
+        on_press: root.force_list_view_update()

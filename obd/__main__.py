@@ -39,9 +39,18 @@ class ItemList(BoxLayout):
 
         return result
 
+    def force_list_view_update(self):
+        self.list_view.adapter.update_for_new_data()
+        self.list_view._trigger_reset_populate()
+
 
 class OBDRoot(BoxLayout):
+    def remove_item_list(self, *args):
+        self.remove_widget(self.item_list)
+        self.button.text = "Connect"
+
     def show_item_list(self):
+        self.orientation = 'vertical'
         self.clear_widgets()
         self.item_list = ItemList()
         self.add_widget(self.item_list)
@@ -71,11 +80,6 @@ class ConnectionModal(ModalView):
 
 
 class OBDDetailsForm(AnchorLayout):
-    speed_box = ObjectProperty()
-    rpm_box = ObjectProperty()
-    throttle_box = ObjectProperty()
-    temp_box = ObjectProperty()
-    time_box = ObjectProperty()
 
     def connect(self):
         modal = ConnectionModal()
@@ -93,12 +97,6 @@ class OBDDetailsForm(AnchorLayout):
             for name in state:
                 sout = "{0}: {1}".format(name, state[name])
                 print(sout)
-
-        print(self.speed_box.text)
-        print(self.rpm_box.text)
-        print(self.throttle_box.text)
-        print(self.temp_box.text)
-        print(self.time_box.text)
 
 
 class OBD(App):
