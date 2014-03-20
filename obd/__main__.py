@@ -9,6 +9,7 @@ from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import StringProperty
+from kivy.clock import Clock
 from obdII import OBDConnection
 from obdII import OBDException
 
@@ -21,6 +22,7 @@ class ItemListItem(BoxLayout):
 
 class ItemList(BoxLayout):
     list_view = ObjectProperty()
+    r_interval = ObjectProperty()
 
     def __init__(self):
         super(ItemList, self).__init__()
@@ -39,9 +41,16 @@ class ItemList(BoxLayout):
 
         return result
 
-    def force_list_view_update(self):
+    def force_list_view_update(self, dt):
         self.list_view.adapter.update_for_new_data()
         self.list_view._trigger_reset_populate()
+
+    def set_r_interval(self):
+        try:
+            r_interval = float(self.r_interval.text)
+            Clock.schedule_interval(self.force_list_view_update, r_interval)
+        except:
+            self.r_interval.text = "Error!"
 
 
 class OBDRoot(BoxLayout):

@@ -19,7 +19,7 @@ OBDRoot:
 
 <ItemListItem>:
     size_hint_y: None
-    height: "75dp"
+    height: "35dp"
     canvas.before:
         Color:
             rgba: self.background
@@ -35,13 +35,27 @@ OBDRoot:
 <ItemList>:
     list_view: list_view
     button: button
+    r_interval: r_interval
     orientation: "vertical"
     ListView:
         id: list_view
         adapter: la.ListAdapter(data=[], cls=ok.ItemListItem, args_converter=root.obd_converter)
-    Button:
-        id: button
+    GridLayout:
         size_hint_y: None
-        height: "40dp"
-        text: "Refresh"
-        on_press: root.force_list_view_update()
+        height: "55dp"
+        cols: 3
+        rows: 1
+        row_default_height: "40dp"
+        row_force_default: True
+        spacing: "10dp"
+        padding: "10dp"
+        Label:
+            text: "Refresh Interval:"
+        TextInput:
+            id: r_interval
+        Button:
+            id: button
+            size_hint_y: None
+            height: "40dp"
+            text: "Refresh"
+            on_press: root.set_r_interval()
