@@ -114,6 +114,7 @@ class OBD(App):
         self.obdLink = None
         self.state = None
 
+
     def connect_to_obd(self):
         self.obdLink = OBDConnection()
         if self.obdLink.status_code != 200:

@@ -41,21 +41,35 @@ OBDRoot:
         id: list_view
         adapter: la.ListAdapter(data=[], cls=ok.ItemListItem, args_converter=root.obd_converter)
     GridLayout:
+        pos_hint: {'center_x': .5}
+        size_hint_x: None
+        width: "275dp"
         size_hint_y: None
         height: "55dp"
         cols: 3
         rows: 1
-        row_default_height: "40dp"
+        row_default_height: "30dp"
         row_force_default: True
         spacing: "10dp"
         padding: "10dp"
+        canvas:
+            Color:
+                rgba: .1, .3, .1, .51
+            Rectangle:
+                size: self.size
+                pos: self.pos
         Label:
+            size_hint_x: None
+            width: "110dp"
             text: "Refresh Interval:"
         TextInput:
+            size_hint_x: None
+            width: "50dp"
             id: r_interval
         Button:
+            size_hint_x: None
+            width: "75dp"
             id: button
             size_hint_y: None
-            height: "40dp"
             text: "Refresh"
             on_press: root.set_r_interval()
