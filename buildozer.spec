@@ -7,7 +7,7 @@ title = OBD
 package.name = obd
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = org.test
+package.domain = ru.ctmed
 
 # (str) Source code where the main.py live
 source.dir = obd
@@ -32,7 +32,7 @@ version.filename = %(source.dir)s/main.py
 # version = 1.2.0
 
 # (list) Application requirements
-requirements = kivy
+requirements = kivy,requests
 
 # (str) Presplash of the application
 #presplash.filename = %(source.dir)s/data/presplash.png
@@ -44,7 +44,7 @@ requirements = kivy
 orientation = landscape
 
 # (bool) Indicate if the application should be fullscreen or not
-fullscreen = 1
+fullscreen = 0
 
 
 #
@@ -52,7 +52,7 @@ fullscreen = 1
 #
 
 # (list) Permissions
-#android.permissions = INTERNET
+android.permissions = INTERNET
 
 # (int) Android API to use
 #android.api = 14
