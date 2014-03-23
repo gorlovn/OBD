@@ -13,7 +13,7 @@ from kivy.clock import Clock
 from obdII import OBDConnection
 from obdII import OBDException
 
-__version__ = '1.0'
+__version__ = '1.1'
 
 
 class ItemListItem(BoxLayout):
@@ -40,7 +40,7 @@ class ItemList(BoxLayout):
             "item_value": str(self.app.obdLink.getState()[item_name])
         }
         if index % 2:
-            result["background"] = (0, 0.1, 0.05, 1)
+            result["background"] = (0, 0.5, 0.5, 1)
         else:
             result["background"] = (0.5, 0.5, 0.7, 1)
 
@@ -70,12 +70,14 @@ class OBDRoot(BoxLayout):
         self.item_list = ItemList()
         self.add_widget(self.item_list)
 
+
 class ErrorModal(ModalView):
     def __init__(self, err_text):
         super(ErrorModal, self).__init__(auto_dismiss=False,
             anchor_y="bottom")
         self.label = Label(text=err_text)
         self.add_widget(self.label)
+
 
 class ConnectionModal(ModalView):
     def __init__(self):

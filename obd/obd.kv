@@ -17,6 +17,15 @@ OBDRoot:
         height: "250dp"
         size_hint_x: None
         width: "250dp"
+        Button:
+            font_size: "55dp"
+            bold: True
+            size_hint_y: None
+            height: "85dp"
+            size_hint_x: None
+            width: "250dp"
+            text: "Connect"
+            on_press: root.connect()
         Label:
             text: "Refresh Interval:"
             bold: True
@@ -33,21 +42,12 @@ OBDRoot:
                     size: self.size        
         TextInput:
             id: r_interval
-            text: "1.0"
+            text: "10.0"
             font_size: "55dp"
             size_hint_y: None
             height: "70dp"
             size_hint_x: None
             width: "250dp"
-        Button:
-            font_size: "55dp"
-            bold: True
-            size_hint_y: None
-            height: "85dp"
-            size_hint_x: None
-            width: "250dp"
-            text: "Connect"
-            on_press: root.connect()
 
 <ItemListItem>:
     orientation: "vertical"
