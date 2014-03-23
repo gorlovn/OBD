@@ -30,6 +30,9 @@ class ItemList(BoxLayout):
         super(ItemList, self).__init__()
         self.app = OBD.get_running_app()
         self.list_view.adapter.data = self.app.obdLink.getState()
+        if self.app.r_interval is not None:
+            self.r_interval = self.app.r_interval
+            self.set_r_interval()
 
     def obd_converter(self, index, item_name):
         result = {
@@ -37,7 +40,7 @@ class ItemList(BoxLayout):
             "item_value": str(self.app.obdLink.getState()[item_name])
         }
         if index % 2:
-            result["background"] = (0, 0, 0, 1)
+            result["background"] = (0, 0.1, 0.05, 1)
         else:
             result["background"] = (0.5, 0.5, 0.7, 1)
 
@@ -49,10 +52,11 @@ class ItemList(BoxLayout):
 
     def set_r_interval(self):
         try:
-            r_interval = float(self.r_interval.text)
+            r_interval = float(self.r_interval)
             Clock.schedule_interval(self.force_list_view_update, r_interval)
         except:
-            self.r_interval.text = "Error!"
+            modal = ErrorModal("Set_r_interval Error!")
+            modal.open()
 
 
 class OBDRoot(BoxLayout):
@@ -66,6 +70,12 @@ class OBDRoot(BoxLayout):
         self.item_list = ItemList()
         self.add_widget(self.item_list)
 
+class ErrorModal(ModalView):
+    def __init__(self, err_text):
+        super(ErrorModal, self).__init__(auto_dismiss=False,
+            anchor_y="bottom")
+        self.label = Label(text=err_text)
+        self.add_widget(self.label)
 
 class ConnectionModal(ModalView):
     def __init__(self):
@@ -91,12 +101,14 @@ class ConnectionModal(ModalView):
 
 
 class OBDDetailsForm(AnchorLayout):
+    ri_box = ObjectProperty()
 
     def connect(self):
         modal = ConnectionModal()
         modal.open()
         app = OBD.get_running_app()
         try:
+            app.r_interval = self.ri_box.text
             app.connect_to_obd()
             modal.label.text = "Connected!"
             connected = True
@@ -115,6 +127,7 @@ class OBD(App):
         super(OBD, self).__init__()
         self.obdLink = None
         self.state = None
+        self.r_interval = "1.0"
 
     def connect_to_obd(self):
         self.obdLink = OBDConnection()

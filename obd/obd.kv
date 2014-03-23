@@ -7,19 +7,54 @@ OBDRoot:
     OBDDetailsForm:
 
 <OBDDetailsForm>:
+    ri_box: r_interval
     anchor_x: "center"
     anchor_y: "center"
-    Button:
+
+    BoxLayout:
+        orientation: "vertical"
         size_hint_y: None
-        height: "40dp"
+        height: "250dp"
         size_hint_x: None
-        width: "100dp"
-        text: "Connect"
-        on_press: root.connect()
+        width: "250dp"
+        Label:
+            text: "Refresh Interval:"
+            bold: True
+            size_hint_y: None
+            height: "30dp"
+            size_hint_x: None
+            width: "250dp"
+            color: 1,0,1,1
+            canvas.before:
+                Color:
+                    rgba: 0, 0, 1, .51
+                Rectangle:
+                    pos: self.pos
+                    size: self.size        
+        TextInput:
+            id: r_interval
+            text: "1.0"
+            font_size: "55dp"
+            size_hint_y: None
+            height: "70dp"
+            size_hint_x: None
+            width: "250dp"
+        Button:
+            font_size: "55dp"
+            bold: True
+            size_hint_y: None
+            height: "85dp"
+            size_hint_x: None
+            width: "250dp"
+            text: "Connect"
+            on_press: root.connect()
 
 <ItemListItem>:
+    orientation: "vertical"
     size_hint_y: None
-    height: "35dp"
+    height: "250dp"
+    size_hint_x: None
+    width: "250dp"
     canvas.before:
         Color:
             rgba: self.background
@@ -28,48 +63,34 @@ OBDRoot:
             size: self.size    
             
     Label:
-        text: root.item_name
-    Label:
         text: root.item_value
+        font_size: "55dp"
+        bold: True
+        size_hint_y: None
+        height: "220dp"
+        size_hint_x: None
+        width: "250dp"
+    Label:
+        text: root.item_name
+        bold: True
+        size_hint_y: None
+        height: "30dp"
+        size_hint_x: None
+        width: "250dp"
+        color: 1,0,1,1
+        canvas.before:
+            Color:
+                rgba: 0, 0, 1, .51
+            Rectangle:
+                pos: self.pos
+                size: self.size        
             
 <ItemList>:
     list_view: list_view
-    button: button
-    r_interval: r_interval
     orientation: "vertical"
     ListView:
+        pos_hint: {'center_x': .5}
         id: list_view
         adapter: la.ListAdapter(data=[], cls=ok.ItemListItem, args_converter=root.obd_converter)
-    GridLayout:
-        pos_hint: {'center_x': .5}
         size_hint_x: None
-        width: "275dp"
-        size_hint_y: None
-        height: "55dp"
-        cols: 3
-        rows: 1
-        row_default_height: "30dp"
-        row_force_default: True
-        spacing: "10dp"
-        padding: "10dp"
-        canvas:
-            Color:
-                rgba: .1, .3, .1, .51
-            Rectangle:
-                size: self.size
-                pos: self.pos
-        Label:
-            size_hint_x: None
-            width: "110dp"
-            text: "Refresh Interval:"
-        TextInput:
-            size_hint_x: None
-            width: "50dp"
-            id: r_interval
-        Button:
-            size_hint_x: None
-            width: "75dp"
-            id: button
-            size_hint_y: None
-            text: "Refresh"
-            on_press: root.set_r_interval()
+        width: "250dp"
