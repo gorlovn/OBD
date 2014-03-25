@@ -13,7 +13,7 @@ from kivy.clock import Clock
 from obdII import OBDConnection
 from obdII import OBDException
 
-__version__ = '1.1'
+__version__ = '1.2'
 
 
 class ItemListItem(BoxLayout):
