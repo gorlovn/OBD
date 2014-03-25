@@ -118,10 +118,11 @@ class OBDDetailsForm(AnchorLayout):
             modal.label.text = "Sorry, couldn't connect"
             connected = False
         if connected:
-            state = app.state
-            for name in state:
-                sout = "{0}: {1}".format(name, state[name])
-                print(sout)
+            pass
+#            state = app.state
+#            for name in state:
+#                sout = "{0}: {1}".format(name, state[name])
+#                print(sout)
 
 
 class OBD(App):
